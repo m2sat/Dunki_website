@@ -133,8 +133,11 @@
             </div>
             <div class="cart-total">
                 <h3>Total: <span id="cart-total">$0.00</span></h3>
+                <div class="form-group">
+                    <label for="deliveryNote">Delivery Note:</label>
+                    <textarea class="form-control" id="deliveryNote" rows="4" cols="50" placeholder="Add any special delivery instructions"></textarea>
+                </div>
                 <button class="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-
             </div>
         </div>
     </div>
@@ -213,7 +216,22 @@
         function checkout() {
             window.location.href = 'checkout.html';
         }
+        $(document).ready(function() {
+            const navToggle = $('#navToggle');
+            const sidebar = $('#sidebar');
 
+            navToggle.on('click', function() {
+                sidebar.toggleClass('open');
+            });
+
+            $(document).on('click', function(e) {
+                if ($(window).width() <= 768 && 
+                    !$(e.target).closest('#sidebar').length && 
+                    !$(e.target).closest('#navToggle').length) {
+                    sidebar.removeClass('open');
+                }
+            });
+        });
     </script>
 </body>
 </html>
